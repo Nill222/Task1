@@ -51,7 +51,6 @@ public class User {
         return true;
     }
 
-    // hashCode (без Objects)
     @Override
     public int hashCode() {
         int result = (id != null ? id.hashCode() : 0);

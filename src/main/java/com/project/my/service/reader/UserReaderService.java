@@ -6,9 +6,7 @@ import java.util.List;
 
 public interface UserReaderService {
 
-    // читает все строки файла
     List<String> readLines(String path);
 
-    // создает список пользователей
     List<User> readUsers(String path);
 }

@@ -2,7 +2,7 @@ package com.project.my.validation;
 
 import com.project.my.entity.User;
 
-public class UserReader implements UserValidator{
+public class UserValidatorImpl implements UserValidator{
     @Override
     public boolean isValidLine(User user) {
         if(user == null) {return false;}
@@ -72,7 +72,6 @@ public class UserReader implements UserValidator{
 
     @Override
     public boolean canCreateUser(Integer id, int age, int salary) {
-        // Комплексная проверка перед созданием: использует низкоуровневые проверки
         return isValidId(id) && isValidAge(age) && isValidSalary(salary);
     }
 
