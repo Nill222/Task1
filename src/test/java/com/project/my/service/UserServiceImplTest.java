@@ -1,72 +1,62 @@
 package com.project.my.service;
 
-import com.project.my.entity.User;
 import com.project.my.exception.UserException;
 import com.project.my.service.sort.UserService;
+import com.project.my.service.sort.UserSortService;
 import com.project.my.service.sort.impl.UserServiceImpl;
+import com.project.my.service.sort.impl.UserSortServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class UserServiceImplTest {
-
     private UserService userService;
-    private User[] users;
+    private UserSortService userSortService;
+
+    private int[] values;
 
     @BeforeEach
     void setUp() {
         userService = new UserServiceImpl();
-
-        users = new User[]{
-                new User(1, 200, 25),
-                new User(2, 300, 30),
-                new User(3, 100, 20)
-        };
+        userSortService = new UserSortServiceImpl();
+        values = new int[]{1, 2, 3, 4, 5};
     }
 
     @Test
-    void testFindYoungestAge() throws UserException {
-        int minAge = userService.findYoungestAge(users);
-        assertEquals(20, minAge);
+    void testFindMin() throws UserException {
+        int minV = userService.findMinValue(values);
+        assertEquals(1, minV);
     }
 
     @Test
-    void testFindMaxSalary() throws UserException {
-        int maxSalary = userService.findMaxSalary(users);
-        assertEquals(300, maxSalary);
+    void testFindMax() throws UserException {
+        int maxV = userService.findMaxValue(values);
+        assertEquals(5, maxV);
     }
 
     @Test
-    void testSumAge() throws UserException {
-        int sum = userService.sumAge(users);
-        assertEquals(75, sum);
+    void testSumValues() throws UserException {
+        int sum = userService.sumValues(values);
+        assertEquals(15, sum);
     }
 
     @Test
-    void testSortByAgeBubble() throws UserException {
-        userService.sortByAgeBubble(users);
+    void testBubbleSort() throws UserException {
+        int[] arr = {5, 3, 1, 4, 2};
 
-        assertEquals(20, users[0].getAge());
-        assertEquals(25, users[1].getAge());
-        assertEquals(30, users[2].getAge());
+        userSortService.sortByBubble(arr);
+
+        assertArrayEquals(new int[]{1,2,3,4,5}, arr);
     }
 
     @Test
-    void testSortByAgeQuick() throws UserException {
-        userService.sortByAgeQuick(users);
+    void testQuickSort() throws UserException {
+        int[] arr = {5, 3, 1, 4, 2};
 
-        assertEquals(20, users[0].getAge());
-        assertEquals(25, users[1].getAge());
-        assertEquals(30, users[2].getAge());
-    }
+        userSortService.sortByQuick(arr);
 
-    @Test
-    void testEmptyArrayThrowsException() {
-        User[] empty = new User[0];
-
-        assertThrows(UserException.class, () -> userService.findYoungestAge(empty));
-        assertThrows(UserException.class, () -> userService.sortByAgeBubble(empty));
+        assertArrayEquals(new int[]{1,2,3,4,5}, arr);
     }
 }
 

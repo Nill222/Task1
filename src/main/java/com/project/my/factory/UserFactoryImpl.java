@@ -7,19 +7,17 @@ import org.apache.logging.log4j.Logger;
 
 public class UserFactoryImpl implements UserFactory {
 
-    private static final Logger logger = LogManager.getLogger(UserFactoryImpl.class);
+    private static final Logger logger = LogManager.getLogger();
+    private static int counter = 0;
 
     @Override
-    public User createUser(Integer id, int salary, int age) {
-        if(id == null){
-            logger.error("Не удалось создать пользователя — id = null");
-            throw new UserException("Поля не могут быть пустыми");
+    public User createUser(int[] values) throws UserException{
+        if(values.length < 1){
+            logger.error("Не удалось создать пользователя");
+            throw new UserException("Массив не может быть пустыми");
         }
-        if(id <0 || age <=0 || salary <=0){
-            logger.warn("Данные id='{}', salary='{}', age='{}' отрицательны", id, salary, age);
-            throw new UserException("данные не могут быть отрицательным");
-        }
-        logger.debug("Пользователь создан с параметрами id='{}', salary='{}', age='{}'", id, salary, age);
-        return new User(id, salary, age);
+        int id = ++counter;
+        logger.debug("Пользователь создан");
+        return new User(id, values);
     }
 }

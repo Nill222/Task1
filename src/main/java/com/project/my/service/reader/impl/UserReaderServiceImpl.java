@@ -1,7 +1,9 @@
 package com.project.my.service.reader.impl;
 
 import com.project.my.entity.User;
+import com.project.my.exception.UserException;
 import com.project.my.factory.UserFactory;
+import com.project.my.parser.UserParser;
 import com.project.my.service.reader.UserReaderService;
 import com.project.my.validation.UserValidator;
 import org.apache.logging.log4j.LogManager;
@@ -15,18 +17,20 @@ import java.util.List;
 
 public class UserReaderServiceImpl implements UserReaderService {
 
-    private static final Logger logger = LogManager.getLogger(UserReaderServiceImpl.class);
+    private static final Logger logger = LogManager.getLogger();
 
     private final UserValidator validator;
     private final UserFactory factory;
+    private final UserParser userParser;
 
-    public UserReaderServiceImpl(UserValidator validator, UserFactory factory) {
+    public UserReaderServiceImpl(UserValidator validator, UserFactory factory, UserParser userParser) {
             this.validator = validator;
             this.factory = factory;
+            this.userParser = userParser;
     }
 
     @Override
-    public List<String> readLines(String path) {
+    public List<String> readLines(String path) throws UserException {
         logger.debug("Чтение файла '{}'.", path);
 
         try {
@@ -36,19 +40,20 @@ public class UserReaderServiceImpl implements UserReaderService {
 
         } catch (IOException e) {
             logger.error("Ошибка чтения файла '{}': {}", path, e.getMessage());
-            throw new RuntimeException("Ошибка чтения файла: " + path, e);
+            throw new UserException("Ошибка чтения файла: " + path, e);
 
         }
     }
 
     @Override
-    public List<User> readUsers(String path) {
+    public List<User> readUsers(String path) throws UserException {
         logger.debug("Начало обработки пользователей из файла {}", path);
 
         List<String> lines = readLines(path);
         List<User> users = new ArrayList<>();
 
         for (String line : lines) {
+
             processLine(line, users);
         }
 
@@ -57,46 +62,31 @@ public class UserReaderServiceImpl implements UserReaderService {
         return users;
     }
 
-    private void processLine(String line, List<User> users) {
+    private void processLine(String line, List<User> users) throws UserException {
         if (line == null || line.isBlank()) {
             logger.debug("Пропущена пустая строка");
-
             return;
         }
 
         if (!validator.isValidLine(line)) {
             logger.warn("Некорректная строка пропущена: '{}'", line);
-
             return;
         }
 
-        String[] parts = line.trim().split("[;,\\-\\s]+");
-        if (parts.length < 3) {
-            logger.warn("Недостаточно данных в строке: '{}'", line);
-
-            return;
-        }
+        int[] values = userParser.parse(line);
 
         try {
-            Integer id = Integer.parseInt(parts[0]);
-            int salary = Integer.parseInt(parts[1]);
-            int age = Integer.parseInt(parts[2]);
-
-            if (!validator.canCreateUser(id, age, salary)) {
+            if (!validator.canCreateUser(values)) {
                 logger.warn("Строка прошла базовую проверку, но невалидна по полям: '{}'", line);
 
                 return;
             }
 
-            User user = factory.createUser(id, salary, age);
+            User user = factory.createUser(values);
             users.add(user);
-
-            logger.warn("Строка прошла базовую проверку, но невалидна по полям: '{}'", line);
-
 
         } catch (NumberFormatException e) {
             logger.warn("Неверный числовой формат в строке '{}': {}", line, e.getMessage());
-
         }
     }
 }

@@ -1,39 +1,33 @@
 package com.project.my.entity;
 
+import java.util.Arrays;
+
 public class User {
 
     private Integer id;
-    private int salary;
-    private int age;
+    private int[] values;
 
-    public User(Integer id, int salary, int age) {
+
+    public User(Integer id, int[] values) {
         this.id = id;
-        this.salary = salary;
-        this.age = age;
+
+        this.values = values;
+    }
+
+    public int[] getValues() {
+        return values;
+    }
+
+    public void setValues(int[] values) {
+        this.values = values;
     }
 
     public Integer getId() {
         return id;
     }
 
-    public int getSalary() {
-        return salary;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public void setSalary(int salary) {
-        this.salary = salary;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
     }
 
     @Override
@@ -43,8 +37,7 @@ public class User {
 
         User other = (User) o;
 
-        if (age != other.age) return false;
-        if (salary != other.salary) return false;
+        if(values.length != other.values.length) return false;
 
         if (id != null ? !id.equals(other.id) : other.id != null) return false;
 
@@ -54,8 +47,7 @@ public class User {
     @Override
     public int hashCode() {
         int result = (id != null ? id.hashCode() : 0);
-        result = 31 * result + salary;
-        result = 31 * result + age;
+        result = 31 * result + Arrays.hashCode(values);
         return result;
     }
 
@@ -63,8 +55,7 @@ public class User {
     public String toString() {
         final StringBuilder sb = new StringBuilder("User{");
         sb.append("id=").append(id);
-        sb.append(", salary='").append(salary);
-        sb.append(", age=").append(age);
+        sb.append(", values=").append(Arrays.toString(values));
         sb.append('}');
         return sb.toString();
     }
