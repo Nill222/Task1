@@ -1,0 +1,25 @@
+package com.project.my.entity.specification;
+
+import com.project.my.entity.User;
+import com.project.my.exception.UserException;
+import com.project.my.service.sort.UserService;
+import com.project.my.service.sort.impl.UserServiceImpl;
+
+public class UserMaxEqualsSpecification implements UserSpecification {
+    private final int value;
+    private final UserService service;
+
+    public UserMaxEqualsSpecification(int value, UserService service) {
+        this.value = value;
+        this.service = service;
+    }
+
+    @Override
+    public boolean isSatisfiedBy(User user) {
+        try {
+            return service.findMaxValue(user.getValues()) == value;
+        } catch (UserException e) {
+            return false;
+        }
+    }
+}
