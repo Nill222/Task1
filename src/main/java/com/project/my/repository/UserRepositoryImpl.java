@@ -1,7 +1,7 @@
 package com.project.my.repository;
 
 import com.project.my.entity.User;
-import com.project.my.entity.specification.UserSpecification;
+import com.project.my.specification.UserSpecification;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

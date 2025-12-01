@@ -1,9 +1,8 @@
-package com.project.my.entity.specification;
+package com.project.my.specification;
 
 import com.project.my.entity.User;
 import com.project.my.exception.UserException;
 import com.project.my.service.sort.UserService;
-import com.project.my.service.sort.impl.UserServiceImpl;
 
 public class UserMaxEqualsSpecification implements UserSpecification {
     private final int value;

@@ -1,4 +1,4 @@
-    package com.project.my.entity.specification;
+    package com.project.my.specification;
 
     import com.project.my.entity.User;
 
