@@ -1,10 +1,8 @@
 package com.project.my.service;
 
 import com.project.my.exception.UserException;
-import com.project.my.service.sort.UserService;
-import com.project.my.service.sort.UserSortService;
-import com.project.my.service.sort.impl.UserServiceImpl;
-import com.project.my.service.sort.impl.UserSortServiceImpl;
+import com.project.my.service.impl.UserServiceImpl;
+import com.project.my.service.impl.UserSortServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

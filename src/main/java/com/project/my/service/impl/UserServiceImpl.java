@@ -1,8 +1,8 @@
-package com.project.my.service.sort.impl;
+package com.project.my.service.impl;
 
 import com.project.my.entity.User;
 import com.project.my.exception.UserException;
-import com.project.my.service.sort.UserService;
+import com.project.my.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

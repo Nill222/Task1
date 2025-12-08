@@ -1,4 +1,4 @@
-package com.project.my.service.sort;
+package com.project.my.service;
 
 import com.project.my.exception.UserException;
 

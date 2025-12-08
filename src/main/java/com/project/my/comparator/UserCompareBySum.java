@@ -2,7 +2,7 @@ package com.project.my.comparator;
 
 import com.project.my.entity.User;
 import com.project.my.exception.UserException;
-import com.project.my.service.sort.UserService;
+import com.project.my.service.UserService;
 
 import java.util.Comparator;
 

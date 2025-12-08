@@ -1,6 +1,7 @@
-package com.project.my.repository;
+package com.project.my.repository.impl;
 
 import com.project.my.entity.User;
+import com.project.my.repository.UserRepository;
 import com.project.my.specification.UserSpecification;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -79,16 +80,6 @@ public class UserRepositoryImpl implements UserRepository {
         }
         logger.debug("поиск по спецификации");
         return users.stream().filter(specification::isSatisfiedBy).toList();
-    }
-
-    @Override
-    public void sort(Comparator<User> comparator) {
-        if (comparator == null) {
-            logger.warn("comparator пуст");
-            return;
-        }
-        logger.debug("сортировка методом sort");
-        users.sort(comparator);
     }
 
     @Override

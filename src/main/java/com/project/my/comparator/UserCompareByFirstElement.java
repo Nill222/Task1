@@ -5,6 +5,7 @@ import com.project.my.entity.User;
 import java.util.Comparator;
 
 public class UserCompareByFirstElement implements Comparator<User> {
+
     @Override
     public int compare(User o1, User o2) {
         int first1 = (o1.getValues() != null && o1.getValues().length > 0) ? o1.getValues()[0] :0;

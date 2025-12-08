@@ -15,11 +15,11 @@ public class User {
     }
 
     public int[] getValues() {
-        return values;
+        return Arrays.copyOf(values, values.length);
     }
 
     public void setValues(int[] values) {
-        this.values = values;
+        this.values = Arrays.copyOf(values, values.length);
     }
 
     public Integer getId() {
