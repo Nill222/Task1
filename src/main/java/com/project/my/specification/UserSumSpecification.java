@@ -15,11 +15,7 @@ public class UserSumSpecification implements UserSpecification {
 
     @Override
     public boolean isSatisfiedBy(User user) {
-        try {
-            int sum = service.sumValues(user.getValues());
-            return sum >= limit;
-        } catch (UserException e) {
-            return false;
-        }
+        int sum = service.sumValues(user.getValues());
+        return sum >= limit;
     }
 }

@@ -1,10 +1,7 @@
 package com.project.my.warehouse;
 
-import com.project.my.entity.User;
-import com.project.my.entity.UserDto;
-import com.project.my.observer.UserObserver;
+import com.project.my.dto.UserDto;
 
-public interface UserWarehouse extends UserObserver {
-//    UserDto getStats(Integer id);
-//    void remove(Integer id);
+public interface UserWarehouse {
+    void put(Integer userId, UserDto userDto);
 }

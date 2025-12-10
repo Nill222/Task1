@@ -1,4 +1,4 @@
-package com.project.my.entity;
+package com.project.my.dto;
 
 public record UserDto(
         Integer id,

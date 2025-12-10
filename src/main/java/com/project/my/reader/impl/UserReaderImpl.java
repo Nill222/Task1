@@ -16,17 +16,16 @@ public class UserReaderImpl implements UserReader {
 
     @Override
     public List<String> readLines(String path) throws UserException {
-        logger.debug("Чтение файла '{}'.", path);
+        logger.debug("Attempting to read file: '{}'", path);
 
         try {
             List<String> lines = Files.readAllLines(Path.of(path));
-            logger.info("Файл '{}' успешно прочитан. Количество строк: {}", path, lines.size());
+            logger.info("File '{}' successfully read. Total lines: {}", path, lines.size());
             return lines;
 
         } catch (IOException e) {
-            logger.error("Ошибка чтения файла '{}': {}", path, e.getMessage());
-            throw new UserException("Ошибка чтения файла: " + path, e);
-
+            logger.error("Failed to read file '{}'. Error: {}", path, e.getMessage());
+            throw new UserException("Failed to read file: " + path, e);
         }
     }
 }

@@ -19,11 +19,11 @@ public class UserFactoryImpl implements UserFactory {
     @Override
     public User createUser(int[] values) throws UserException{
         if(values.length < 1){
-            logger.error("Не удалось создать пользователя");
-            throw new UserException("Массив не может быть пустыми");
+            logger.error("Failed to create user: array is null or empty");
+            throw new UserException("Array is null or empty");
         }
         int id = userIdGenerator.generateUserId();
-        logger.debug("Пользователь создан");
+        logger.info("User successfully created with id={} and values={}", id, values);
         return new User(id, values);
     }
 }

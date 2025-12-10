@@ -1,7 +1,6 @@
 package com.project.my.service.impl;
 
 import com.project.my.entity.User;
-import com.project.my.exception.UserException;
 import com.project.my.service.UserSortService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -12,9 +11,9 @@ public class UserSortServiceImpl implements UserSortService {
     private static final Logger logger = LogManager.getLogger();
 
     @Override
-    public void sortByBubble(int[] values) throws UserException {
+    public void sortByBubble(int[] values) {
 
-        logger.debug("Сортировка пользователей методом пузырьков");
+        logger.debug("Starting bubble sort for array of length {}", values.length);
 
         int n = values.length;
         for (int i = 0; i < n - 1; i++) {
@@ -27,19 +26,19 @@ public class UserSortServiceImpl implements UserSortService {
             }
         }
 
-        logger.info("Пузырьковая сортировка выполнена");
-        logger.debug("Результат: {}", Arrays.toString(values));
+        logger.info("Bubble sort completed successfully");
+        logger.debug("Bubble sort result: {}", Arrays.toString(values));
     }
 
     @Override
-    public void sortByQuick(int[] values) throws UserException {
+    public void sortByQuick(int[] values) {
 
-        logger.debug("Сортировка пользователей методом быстрой сортировки");
+        logger.debug("Starting quick sort for array of length {}", values.length);
 
         quickSort(values, 0, values.length - 1);
 
-        logger.info("Быстрая сортировка завершена");
-        logger.debug("Результат быстрой сортировки: {}", Arrays.toString(values));
+        logger.info("Quick sort completed successfully");
+        logger.debug("Quick sort result: {}", Arrays.toString(values));
     }
 
     private boolean isUserExist(User[] user) {

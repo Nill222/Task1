@@ -1,14 +1,15 @@
 package com.project.my.warehouse.impl;
 
-import com.project.my.entity.User;
-import com.project.my.entity.UserDto;
+import com.project.my.dto.UserDto;
 import com.project.my.warehouse.UserWarehouse;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 public class UserWarehouseImpl implements UserWarehouse {
+    private static final Logger logger = LogManager.getLogger();
     private final Map<Integer, UserDto> store = new HashMap<>();
 
     private UserWarehouseImpl() {}
@@ -21,25 +22,9 @@ public class UserWarehouseImpl implements UserWarehouse {
         return UserWarehouseImpl.Holder.HOLDER_INSTANCE;
     }
 
-//
-//    @Override
-//    public UserDto getStats(Integer id) {
-//        return null;
-//    }
-//
-//    @Override
-//    public void remove(Integer id) {
-//
-//    }
-
     @Override
-    public void onUserUpdate(User user) {
-        int[] arr = user.getValues();
-        int sum = Arrays.stream(arr).sum();
-        int min = Arrays.stream(arr).min().orElse(0);
-        int max = Arrays.stream(arr).max().orElse(0);
-        int avg = Arrays.stream(arr).sum() / arr.length;
-
-        store.put(user.getId(), new UserDto(user.getId(), max, sum, min, avg));
+    public void put(Integer userId, UserDto userDto) {
+        store.put(userId, userDto);
+        logger.info("Warehouse updated statistics for array ID: {}", userId);
     }
 }

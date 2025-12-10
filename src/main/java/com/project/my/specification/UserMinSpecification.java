@@ -15,10 +15,6 @@ public class UserMinSpecification implements UserSpecification {
 
     @Override
     public boolean isSatisfiedBy(User user) {
-        try {
-            return service.findMinValue(user.getValues()) >= min;
-        } catch (UserException e) {
-            return false;
-        }
+        return service.findMinValue(user.getValues()) >= min;
     }
 }

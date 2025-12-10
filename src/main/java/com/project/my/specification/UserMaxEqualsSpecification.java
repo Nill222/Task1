@@ -15,10 +15,6 @@ public class UserMaxEqualsSpecification implements UserSpecification {
 
     @Override
     public boolean isSatisfiedBy(User user) {
-        try {
-            return service.findMaxValue(user.getValues()) == value;
-        } catch (UserException e) {
-            return false;
-        }
+        return service.findMaxValue(user.getValues()) == value;
     }
 }
