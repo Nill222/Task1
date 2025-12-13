@@ -27,4 +27,6 @@ public interface UserRepository {
     List<User> find(UserSpecification specification);
 
     List<User> sorted(Comparator<User> comparator);
+
+    void clear();
 }

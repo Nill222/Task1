@@ -1,8 +1,8 @@
-package com.project.my.specification;
+package com.project.my.specification.impl;
 
 import com.project.my.entity.User;
-import com.project.my.exception.UserException;
 import com.project.my.service.UserService;
+import com.project.my.specification.UserSpecification;
 
 public class UserSumSpecification implements UserSpecification {
     private final int limit;

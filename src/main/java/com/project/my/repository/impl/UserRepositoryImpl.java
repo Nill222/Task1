@@ -124,4 +124,11 @@ public class UserRepositoryImpl implements UserRepository {
                 .sorted(comparator)
                 .toList();
     }
+
+    @Override
+    public void clear() {
+        users.clear();
+        observers.clear();
+        logger.info("Repository cleared");
+    }
 }

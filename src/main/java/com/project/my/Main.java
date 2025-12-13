@@ -14,7 +14,7 @@ import com.project.my.repository.impl.UserRepositoryImpl;
 import com.project.my.service.UserService;
 import com.project.my.service.impl.UserServiceImpl;
 import com.project.my.specification.UserSpecification;
-import com.project.my.specification.UserSumSpecification;
+import com.project.my.specification.impl.UserSumSpecification;
 import com.project.my.validation.UserValidator;
 import com.project.my.validation.impl.UserValidatorImpl;
 import com.project.my.comparator.*;

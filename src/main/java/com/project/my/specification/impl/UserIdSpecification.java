@@ -1,6 +1,7 @@
-package com.project.my.specification;
+package com.project.my.specification.impl;
 
 import com.project.my.entity.User;
+import com.project.my.specification.UserSpecification;
 
 import java.util.Objects;
 
